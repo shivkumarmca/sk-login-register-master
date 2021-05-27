@@ -1,32 +1,59 @@
 {% extends 'layout.html' %}
 {% block content %}
 <div class="signup-form">
-    <form action="/examples/actions/confirmation.php" method="post">
+    <form action="" method="post">
+		{{ form.hidden_tag() }}
 		<h2>Sign Up</h2>
 		<p>Please fill in this form to create an account!</p>
+		
+
+		{% with messages = get_flashed_messages(with_categories=true) %}
+  			{% if messages %}
+       			{% for category, message in messages %}
+				   <div class="alert alert-{{ category }}" role="alert">
+      					{{ message }}
+					</div>
+    			{% endfor %}
+    		{% endif %}
+		{% endwith %}
+
 		<hr>
         <div class="form-group">
-			<div class="row">
-				<div class="col"><input type="text" class="form-control" name="first_name" placeholder="First Name" required="required"></div>
-				<div class="col"><input type="text" class="form-control" name="last_name" placeholder="Last Name" required="required"></div>
-			</div>        	
+        	<div class="row">
+        		<div class="col">
+					{{ form.first_Name(class="form-control", placeholder="First Name") }}
+					<!-- <input type="text" class="form-control" name="first_name" placeholder="First Name" required="required"> -->
+				</div>
+        		<div class="col">
+					{{ form.last_Name(class="form-control", placeholder="Last Name") }}
+					<!-- <input type="text" class="form-control" name="last_name" placeholder="Last Name" required="required"> -->
+					</div>
+        	</div>
         </div>
         <div class="form-group">
-        	<input type="email" class="form-control" name="email" placeholder="Email" required="required">
+			{{ form.email(class="form-control", placeholder="Email") }}
+        	<!-- <input type="email" class="form-control" name="email" placeholder="Email" required="required"> -->
         </div>
-		<div class="form-group">
-            <input type="password" class="form-control" name="password" placeholder="Password" required="required">
-        </div>
-		<div class="form-group">
-            <input type="password" class="form-control" name="confirm_password" placeholder="Confirm Password" required="required">
-        </div>        
         <div class="form-group">
-			<label class="form-check-label"><input type="checkbox" required="required"> I accept the <a href="#">Terms of Use</a> &amp; <a href="#">Privacy Policy</a></label>
-		</div>
-		<div class="form-group">
-            <button type="submit" class="btn btn-primary btn-lg">Sign Up</button>
+        	{{ form.password(class="form-control", placeholder="Password") }}
+			<!-- <input type="password" class="form-control" name="password" placeholder="Password" required="required"> -->
         </div>
-    </form>
-	<div class="hint-text">Already have an account? <a href="{{url_for('login')}}">Login here</a></div>
-</div>
+        <div class="form-group">
+			{{ form.confirm_Password(class="form-control", placeholder="Confirm Password") }}
+        	<!-- <input type="password" class="form-control" name="confirm_password" placeholder="Confirm Password"
+        		required="required"> -->
+        </div>
+        <div class="form-group">
+			{{ form.accept_ToU.label(class="form-check-label") }}
+			{{ form.accept_ToU(class="form-check-label") }}
+        	<!-- <label class="form-check-label"><input type="checkbox" required="required"> I accept the <a href="#">Terms -->
+        			<!-- of Use</a> &amp; <a href="#">Privacy Policy</a></label> -->
+        </div>
+        <div class="form-group">
+			{{ form.submit(class="btn btn-primary btn-lg") }}
+        	<!-- <button type="submit" class="btn btn-primary btn-lg">Sign Up</button> -->
+        </div>
+        </form>
+        <div class="hint-text">Already have an account? <a href="{{url_for('login')}}">Login here</a></div>
+        </div>
 {% endblock %}
