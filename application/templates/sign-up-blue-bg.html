@@ -3,16 +3,21 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+<title>Sign UP</title>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:400,700">
-<title>Bootstrap Simple Login Form with Blue Background</title>
-<link rel="stylesheet" href="assets/css/bootstrap.min.css">
-<link rel="stylesheet" href="assets/css/font-awesome.min.css">
 
-<link rel="stylesheet" href="css/style.css">
+<!-- "{{ url_for('static', filename='style.css') }}" -->
+<link rel="stylesheet" href= "{{ url_for('static', filename='css/bootstrap.min.css') }}">
+<link rel="stylesheet" href= "{{ url_for('static', filename='css/font-awesome.min.css') }}">
 
-<script src="assets/js/jquery-3.5.1.min.js"></script>
-<script src="assets/js/popper.min.js"></script>
-<script src="assets/js/bootstrap.min.js"></script>
+
+<!-- <link rel="stylesheet" href="path/to/font-awesome/css/font-awesome.min.css"> -->
+<script src= "{{ url_for('static', filename='js/jquery-3.5.1.slim.min.js') }}"></script>
+<script src= "{{ url_for('static', filename='js/popper.min.js') }}" ></script>
+<script src= "{{ url_for('static', filename='js/bootstrap.min.js') }}" ></script>
+
+<link rel="stylesheet" href= "{{ url_for('static', filename='css/style.css') }}">
 
 </head>
 <body>
@@ -43,7 +48,7 @@
             <button type="submit" class="btn btn-primary btn-lg">Sign Up</button>
         </div>
     </form>
-	<div class="hint-text">Already have an account? <a href="sign-in-blue-bg.html">Login here</a></div>
+	<div class="hint-text">Already have an account? <a href="{{url_for('login')}}">Login here</a></div>
 </div>
 </body>
 </html>
