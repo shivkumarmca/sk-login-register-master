@@ -48,8 +48,14 @@
         
         <h2 class="text-center">Let's Get Started!</h2>        
         <hr>
-        <p>Already Registered? <a href="{{ url_for('login')}}">Login Here</a></p>
-        <p>Don't Have an Account? <a href="{{ url_for('register')}}">Sign Up</a></p>
+        <p>
+        {{ current_user.first_Name + ' ' + current_user.last_Name}}
+        {% if current_user.is_authenticated %}
+            <a href="{{ url_for('logout')}}">Logout</a></p>
+        {% else %}
+            <p>Already Registered? <a href="{{ url_for('login')}}">Login Here</a></p>
+            <p>Don't Have an Account? <a href="{{ url_for('register')}}">Sign Up</a></p>
+        {% endif %}
     </form>
 </div>
 {% endblock %}
