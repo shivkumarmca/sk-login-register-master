@@ -1,9 +1,7 @@
 from flask_wtf import form
-from werkzeug.utils import redirect
 from application import app
-from flask import render_template, url_for, flash
+from flask import render_template, url_for, flash, redirect
 from application.forms import LoginForm, SignUpForm
-
 
 app.config['SECRET_KEY'] = "shiv"
 
@@ -15,9 +13,15 @@ def home():
 @app.route("/login", methods=['GET','POST'])
 def login():
     form = LoginForm()
+    
     if form.validate_on_submit():
-        flash(f'(form.email.data) logged in!', 'success')
-        return redirect(url_for('home'))
+        if form.email.data == 'shivkumargwl@gmail.com' and form.password.data == 'shiv':
+            # print(form.email.data)
+            flash(f'Logged in!', 'success')
+            return redirect(url_for('home'))
+        else:
+            flash(f'Login Failure!', 'danger')
+            # return render_template('sign-in-blue-bg.html', title='Login', form=form)
     return render_template('sign-in-blue-bg.html', title='Login', form=form)
 
 
@@ -25,7 +29,6 @@ def login():
 def register():
     form = SignUpForm()
     if form.validate_on_submit():
-        flash(f'Account Created for (form.email.data)!', 'success')
-        return redirect(url_for('login'))
-    
+        flash(f'Account Created for {form.email.data}!', 'success')
+        return redirect(url_for('home'))
     return render_template('sign-up-blue-bg.html', title='Sign Up', form=form)
